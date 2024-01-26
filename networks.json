@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "SafeDeal": {
+      "address": "0xa13c52A2c12CdC609ACe4F32ca39Eb7b9853A98c",
+      "startBlock": 8968291
+    }
+  }
+}

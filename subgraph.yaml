@@ -1,0 +1,47 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SafeDeal
+    network: goerli
+    source:
+      address: "0xa13c52A2c12CdC609ACe4F32ca39Eb7b9853A98c"
+      abi: SafeDeal
+      startBlock: 8968291
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Cancelled
+        - Completed
+        - ModeratorAdded
+        - ModeratorRemoved
+        - NewSigner
+        - OwnershipTransferred
+        - Started
+        - Withdraw
+      abis:
+        - name: SafeDeal
+          file: ./abis/SafeDeal.json
+      eventHandlers:
+        - event: Cancelled(indexed uint256,(address,address,address,uint256,uint256,uint256,uint256,bool))
+          handler: handleCancelled
+        - event: Completed(indexed uint256,(address,address,address,uint256,uint256,uint256,uint256,bool))
+          handler: handleCompleted
+        - event: ModeratorAdded(indexed address)
+          handler: handleModeratorAdded
+        - event: ModeratorRemoved(indexed address)
+          handler: handleModeratorRemoved
+        - event: NewSigner(indexed address)
+          handler: handleNewSigner
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Started(indexed uint256,(address,address,address,uint256,uint256,uint256,uint256,bool))
+          handler: handleStarted
+        - event: Withdraw(uint256,uint256)
+          handler: handleWithdraw
+      file: ./src/safe-deal.ts
